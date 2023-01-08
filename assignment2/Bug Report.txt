@@ -1,0 +1,39 @@
+1.
+The bomb will drop forever if it misses the building.
+When the bomb goes between the building, it keeps falling without explode, so it can't be dropped again.
+I think it should explode when it reaches beyond the window size, so that it can be dropped again.
+To reproduce the bug, drop the bomb between buildings. We can reduce the building widths to make this easier.
+
+The cause of this bug is that there is no detection of the edge of the window.
+
+2.
+The bomb never hits the rightmost building.
+I can't drop the bomb to hit the rightmost building. It can only hit the second one on the right, so the plane will hit the rightmost building and the game will be over.
+I think the head of the plane should start on the right beyond the window, so that there is enough time for me to respond and drop the bomb to hit the rightmost building.
+To reproduce the bug, start the game and try to drop the bomb as soon as the plane comes to right.
+
+The cause is that the tail of the plane starts from the edge, so the width of the plane covers the first building.
+
+3.
+There are buildings outside the window on the right.
+After I make the plane start from outside the window to hit the rightmost building appears on the window, (bug 2), game is over when the plane is outside the window. It means that there are buildings outside the window. The plane hits these buildings and causes the over of game.
+I think there shouldn't be extra buildings off the window, and I won't fail the game because of them.
+To reproduce the bug, start the game and play regularly to shrink the buildings on the window, after a while, the game will be over because of these invisible buildings.
+
+The cause is that two more buildings than needed is created.
+
+4.
+Game over appears instead of success.
+When I play the game and level the buildings, half of the plane goes down, off the window. Then it touches the tiny bit of the building and the game is over.
+I think I succeed before half of the plane goes off the window.
+To reproduce the bug, play the game and level all the buildings. Then wait for the plane to go off window and trigger "Game Over".
+
+The cause is that they didn't take the plane's height into account, and the condition should be greater than, not strictly equal.
+
+5.
+Sometimes the bomb hits the building, but not detected.
+When the bomb hits the edge of the building, for example, only the right half of the bomb hits the building, the hit is not detected, and the building doesn't shrink. 
+I think even if only the right half of the bomb hits the building, it should also be detected, and the building should shrink. Also, it will be better if the building shrink as soon as the bottom of the bomb hits it.
+To reproduce the bug, try to drop the bomb at the left edge of any buildings. 
+
+The cause is that the condition uses the x, y coordinate of the bomb, which is the top left corner. It doesn't take the width and height of the bomb into consideration.

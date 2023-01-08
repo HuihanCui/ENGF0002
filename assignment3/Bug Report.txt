@@ -1,0 +1,71 @@
+1.
+The frog dies when going on the turtle.
+When I move the frog to get on the turtle to pass the river, it dies unexpectedly.
+I think the frog should get on the turtle successfully, and move with it.
+Move the frog to pass the road, then try to move it on to a turtle. Then you will discover the frog dies.
+
+Cause: 
+There is a typing error. It should be on_log, not on_long. With this error, the frog on the turtle is not recognised. In contrast, it is regarded as in the river.
+
+2.
+When a frog dies, other frogs continue to die at the same position.
+When the frog dies, it doesn't return to the starting place. Instead, it gets stuck at where it dies, and continues to die and lose the lives.
+I think a new frog should start from the starting place after the previous one dies. Live decreases by one.
+Make the frog die, crash the car or go into river. Then you will discover that your live continue to decrease, and you can't move the frogs to leave that dying position.
+
+Cause:
+There is no reset_position for the frog after it is died, so it will continue to die at the same position. 
+
+3.
+After restarting the game, everything stopped.
+I failed the game and restarted it, but all the logs and cars stop moving. At the same time, I can't move the frogs. Impossible to play the game.
+I think after pressing 'r' to restart the game, the game runs as before, where everything is moving and I can control the frogs to play.
+Use all 7 lives, so the game is over. Then press 'r' to restart the game and reproduce the bug.
+
+Cause:
+When restart, there is no change to the game state. The game_running isn't turn to True.
+
+4.
+Dies when entering the first home. (on the left)
+When the frog moves into the leftmost home, it dies. That hole is not recognized as home in the program.
+I think the frog should enter the home correctly and safely, just as what it is like when it trys to enter the other homes.
+To reproduce the bug, move the frog to avoid the cars and go on the logs. Then try to get left and enter the leftmost home.
+
+Cause:
+When creating homes, the coordinate x already have the correct value. But, in the for loop, increment for x is done first, so actually, the home starts at the second hole.
+
+5.
+Game is not over when time is up.
+After playing for a long time, the time is up. But the game is not over, I can still play as before.
+I think the game should be over after time is up. I will lose the game if I can't move frogs to all five homes before the time is up.
+To reproduce the bug, start the game and wait for the time to run out. To get this faster, the level time can be reduced.
+
+Cause:
+There is no judgement on whether the time is up. The remaining time is not calculated. 
+
+6.
+The game can restart at any time.
+I can press 'r' and restart the game at any time, even in the middle of the game. 
+I think the game should only be allowed to restart after it is over. This is when the I lose all the lives or the time is up.
+To reproduce the bug, start the game and press 'r'. Then it is restarted.
+
+Cause:
+There is no limitation on when to press the button 'r' to restart. I think restart should only be allowed when the game is not running.
+
+7.
+The frog can move down and go off the window.
+When press the button down, the frog moves down and disappears from the window. 
+I think this should not be allowed. The frog should only move in the window. Left, right and down to go out of the window should all be banned except moving along with the log. In that way, the frog should die.
+To reproduce the bug, start the game and press down. Then the frog will go out of the window.
+
+Cause:
+There is no detection of the edge of the window for left, right and down. As a result, I can always press those keys and move the frog.
+
+8.
+Every level is exactly the same.
+When enter the next level, only the level name changed. That means the second level is at the same difficulty as the first one.
+I think each level should be harder than the previous one.
+Keep playing and winning the game. You will discover that each level is the same.
+
+Cause:
+There is no implementation of increasing the difficulty. This can be done by reducing the time given.
